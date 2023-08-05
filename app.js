@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const _ = require('lodash');
 const mongoose = require('mongoose');
 const https = require('https');
+const { stringify } = require('querystring');
 // const { connect } = require('http2');
 
 const app = express();
@@ -37,7 +38,7 @@ app.post('/', async function (req, res) {
             "conversationItem": {
                 "id": "1",
                 "participantId": "1",
-                "text": "hi"
+                "text": req.body.message
             }
         },
         "parameters": {
@@ -63,24 +64,33 @@ app.post('/', async function (req, res) {
 
             if (response.statusCode >= 200 && response.statusCode <= 300) {
 
-                const tweet = new Tweet({
-                    msg: req.body.message,
-                    msgDate: date.getDate().toString()
-                });
 
-                await tweet.save();
-                // res.send('success');
+
                 // console.log("Success");
-                // alert("Success");
+
                 const dataobj = JSON.parse(data);
                 // console.log(response);
-                res.write(dataobj.result.prediction.intents);
-                res.redirect('/');
+                const category = dataobj.result.prediction.intents[0].category;
+                // console.log(category);
+                if (category === 'FAKE') {
+                    res.sendFile(__dirname + "/Failure.html");
+                }
+
+                else {
+                    const tweet = new Tweet({
+                        msg: req.body.message,
+                        msgDate: date.getDate().toString()
+                    });
+
+                    await tweet.save();
+                    res.sendFile(__dirname + "/Success.html");
+                }
+
+
             }
             else {
-                res.send('failure');
-                console.log("Failure");
-                // alert("Failure");
+                res.send('Server failure');
+
             }
 
 
