@@ -22,10 +22,18 @@ main {
 
 }
 
+.post-form textarea, .post-form input, .post-form button{
+    margin: 10px;
+}
+
 .post-form textarea {
     resize: none;
     height: 100px;
     margin-bottom: 10px;
+}
+
+.post-form button{
+    margin: auto;
 }
 
 .post-container {
