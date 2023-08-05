@@ -5,10 +5,10 @@ const mongoose = require('mongoose');
 const https = require('https');
 const { stringify } = require('querystring');
 // const { connect } = require('http2');
-
+const ejs=require('ejs');
 const app = express();
 
-
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -73,7 +73,10 @@ app.post('/', async function (req, res) {
                 const category = dataobj.result.prediction.intents[0].category;
                 // console.log(category);
                 if (category === 'FAKE') {
-                    res.sendFile(__dirname + "/Failure.html");
+                    const score=dataobj.result.prediction.intents[0].confidenceScore*100;
+                    const rounded = parseFloat(score.toFixed(2));
+                    // res.sendFile(__dirname + "/Failure.html");
+                    res.render('failure',{score:rounded});
                 }
 
                 else {
@@ -83,7 +86,10 @@ app.post('/', async function (req, res) {
                     });
 
                     await tweet.save();
-                    res.sendFile(__dirname + "/Success.html");
+                    // res.sendFile(__dirname + "/Success.html");
+                    const score=dataobj.result.prediction.intents[0].confidenceScore*100;
+                    const rounded = parseFloat(score.toFixed(2));
+                    res.render('success',{score:rounded});
                 }
 
 
