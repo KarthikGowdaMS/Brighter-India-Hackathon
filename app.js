@@ -27,5 +27,10 @@ app.get('/', async function(req, res){
 });
 
 app.post('/', async function(req, res){
-    
+    const tweet = new tweet({
+        msg: req.body.message,  
+        msgDate: date.getDate().toString()
+    });
+
+    await tweet.save();
 });
