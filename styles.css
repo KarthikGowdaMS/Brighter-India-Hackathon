@@ -55,6 +55,9 @@ body {
     width: 100%;
 
 }
+#nam{
+    color:white;
+}
 
 header {
      /* background-color:wheat;  */
@@ -73,13 +76,13 @@ header {
     background-size: cover;
     position: relative;
 } */
-header h2{
+header h1{
     color:wheat;
 }
 
 header h1 {
     margin: 0;
-    color: #333333;
+    color:black;
 }
 main {
     width: 100vw;
@@ -99,4 +102,41 @@ main {
     text-align: center; 
 
 }
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    width: 50%;
+    text-align: center;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 

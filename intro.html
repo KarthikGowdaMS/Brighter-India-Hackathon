@@ -11,22 +11,32 @@
 </head>
 <body>
     <header>
-        <h2>Namratha</h2>
-        <h6>Idiot!!!</h6>
+        <h2 style="color: wheat;">DetectDeception</h2>
+        <h5 id="nam">"Unmask the Truth: Your Shield Against Fake Messages!"</h5>
     </header>
 
     <main>
         <div class="post-form">
-            <textarea placeholder="Write something..."></textarea>
-            <input type="file" accept="image/*">
+            <form action="/" method="post">
+                <textarea name="message" placeholder="Write something..."></textarea>
+                <input type="file" accept="image/*">
 
-            <button class="post-btn" onclick="createPost()">Post</button>
+                <button class="post-btn" onclick="createPost()">Post</button>  
+            </form>
+          
         </div>
 
         <div class="post-container">
             <!-- Posts will be dynamically loaded here -->
         </div>
     </main>
+    
+    <div class="modal" id="alertModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAlert()">&times;</span>
+            <p id="alertMessage"></p>
+        </div>
+    </div>
 
     <footer>
         <!-- Your footer content goes here -->

@@ -1,6 +1,6 @@
 // Sample data for demonstration purposes
 let posts = [
-    { text: 'This is a sample post!', imageUrl: '' },
+    // { text: 'This is a sample post!', imageUrl: '' },
     // Add more sample posts here
 
 
@@ -29,6 +29,7 @@ function displayPosts() {
 
         postContainer.appendChild(postElement);
     });
+
 }
 
 function createPost() {
@@ -40,10 +41,14 @@ function createPost() {
         const file = fileInput.files[0];
         imageUrl = URL.createObjectURL(file);
     }
-
+    
     posts.push({ text, imageUrl });
     displayPosts();
 }
 
 // Initial display of posts
+// createPost();
 displayPosts();
+// alert("Posted!!!");
+
+
