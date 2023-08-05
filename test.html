@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Recognition with TensorFlow.js</title>
+  <!-- Load TensorFlow.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
+</head>
+<body>
+  <input type="file" id="imageInput">
+  <img id="imagePreview" style="max-width: 300px; max-height: 300px;">
+  <div id="predictions"></div>
+
+  <!-- Load the MobileNet model -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.0.4/dist/mobilenet.min.js"></script>
+  <script>
+    // When the user selects an image, run the prediction
+    document.getElementById('imageInput').addEventListener('change', handleImageSelect);
+
+    async function handleImageSelect(event) {
+      const file = event.target.files[0];
+      const img = document.getElementById('imagePreview');
+      const predictionsDiv = document.getElementById('predictions');
+
+      // Display the selected image
+      const imgURL = URL.createObjectURL(file);
+      img.src = imgURL;
+
+      // Load the MobileNet model
+      const model = await mobilenet.load();
+
+      // Perform prediction on the selected image
+      const predictions = await model.classify(img);
+
+      // Display the predictions
+      predictionsDiv.innerHTML = '';
+      predictions.forEach(prediction => {
+        predictionsDiv.innerHTML += `<p>${prediction.className}: ${prediction.probability.toFixed(4)}</p>`;
+      });
+    }
+  </script>
+</body>
+</html>
